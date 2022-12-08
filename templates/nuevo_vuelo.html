@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta required name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo vuelo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}"/>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="row align-items-center ">
+                <div class="col-6">
+                    <h1>Nuevo vuelo</h1>
+                </div>
+                <div class="col-2">
+                    <a class="item_menu activo" href="/vuelo/nuevo">Nuevo vuelo</a>
+                </div>
+                <div class="col-2">
+                    <a class="item_menu" href="/vuelo/conexion">Nueva conexion</a>
+                </div>
+                <div class="col-2">
+                    <a class="item_menu" href="/itinerario">Itinerario</a>
+                </div>
+                  
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-sm-12 col-md-6">
+                <form method="post" enctype="multipart/form-data" class="form-floating" id="form-nuevo-vuelo">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" required name="aerolinea" id="aerolinea">
+                            <option selected value="">Seleccione uno</option>                            
+                            {% for aerolinea in info.aerolineas %}
+                                <option value="{{aerolinea[0]}}">{{aerolinea[1]}}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="aerolinea">Aerolinea:</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" required name="no_vuelo" id="no_vuelo" placeholder="No. Vuelo:" readonly>
+                        <label for="no_vuelo">No. Vuelo:</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="number" min="1" class="form-control" required name="no_segmentos" id="no_segmentos" placeholder="No. Segmentos:" value="1">
+                        <label for="no_segmentos">No. Segmentos:</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select class="form-select aeropuerto" required name="aeropuerto[]" id="aeropuerto1">
+                            <option selected value="">Seleccione uno</option>                            
+                            {% for aeropuerto in info.aeropuertos %}
+                                <option value="{{aeropuerto[0]}}">{{aeropuerto[1]}}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="aeropuerto1">Aeropuerto 1:</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select class="form-select piloto" required name="piloto[]" id="piloto1" >
+                            <option selected value="">Seleccione uno</option>                            
+                        </select>
+                        <label for="piloto1">Piloto 1 - 2:</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="date" class="form-control fecha" required name="fecha[]" id="fecha1" placeholder="Fecha 1 - 2:" >
+                        <label for="fecha1">Fecha 1 - 2:</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="number" min="0" max="23" class="form-control hora" required name="hora[]" id="hora1" placeholder="Hora 1 - 2:" >
+                        <label for="hora1">Hora 1 - 2:</label>
+                    </div>
+                    <div class="contenedor-segmentos">
+                        <div class="form-floating mb-3">
+                            <select class="form-select aeropuerto" required name="aeropuerto[]" id="aeropuerto2">
+                                <option selected value="">Seleccione uno</option>                            
+                                {% for aeropuerto in info.aeropuertos %}
+                                    <option value="{{aeropuerto[0]}}">{{aeropuerto[1]}}</option>
+                                {% endfor %}
+                            </select>
+                            <label for="aeropuerto2">Aeropuerto 2:</label>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-success w-100" value="Agregar vuelo" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/nuevo_vuelo.js')}}"></script>
+    <div id="cargando">
+        <img src="{{ url_for('static', filename='img/loading.gif')}}" alt="loading" />
+    </div>
+</body>
+</html>

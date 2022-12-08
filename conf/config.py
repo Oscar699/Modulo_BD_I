@@ -2,6 +2,9 @@
 class Config(object):
     DEBUG = False
     TESTING = False
+    USUARIO = "promo2022"
+    PASSWORD = "promo2022"
+    DNS = "localhost/XE"
 
 
 class DevelopmentConfig(Config):
